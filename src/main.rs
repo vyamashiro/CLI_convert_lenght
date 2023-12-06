@@ -1,8 +1,8 @@
 use dialoguer::{Select, theme::ColorfulTheme};
 use std::io;
 
-mod convert_px;
-use convert_px::convert_px;
+mod convert_px_to_em;
+use convert_px_to_em::convert_px_to_em;
 
 fn main() {
     println!("-----Bem-vindo ao programa CLI!-----");
@@ -35,17 +35,15 @@ fn main() {
             match value {
                 Ok(numero) => {
                     // Chamando a função com o valor convertido
-                    println!("O resultado é {} em", convert_px(numero));
+                    println!("O resultado é {} em", convert_px_to_em(numero));
         
                     // Agora você pode usar 'numero' como um inteiro
                     // ... faça o que precisar com o inteiro aqui ...
                 }
                 Err(e) => {
-                    println!("Erro ao converter a string para inteiro: {}", e);
+                    println!("Error type a valid number: {}", e);
                 }
             }
-
-            // println!("O resultado e {}", convert_px(value))
         },
         1 => println!("Você escolheu a Option 2"),
         2 => println!("Você escolheu a Option 3"),
