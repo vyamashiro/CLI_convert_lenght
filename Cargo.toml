@@ -1,5 +1,5 @@
 [package]
-name = "CLI_convert_lenght"
+name = "cli_convert_lenght"
 version = "1.0.0"
 edition = "2021"
 

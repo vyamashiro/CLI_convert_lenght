@@ -1,3 +1,5 @@
+
+/// Function to convert pixels to em
 pub fn convert_px_to_em(x: f32) -> f32 {
     let size_parent_element: f32 = 16.0;
 

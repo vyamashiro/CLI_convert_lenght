@@ -5,7 +5,7 @@ mod convert_px_to_em;
 use convert_px_to_em::convert_px_to_em;
 
 fn main() {
-    println!("-----Bem-vindo ao programa CLI!-----");
+    println!("{:-^40}", "Length Converter");
 
     // Defina as opções disponíveis
     let options = vec!["Convert px to em", "Convert px to rem", "Convert px to %"];
@@ -47,6 +47,6 @@ fn main() {
         },
         1 => println!("Você escolheu a Option 2"),
         2 => println!("Você escolheu a Option 3"),
-        _ => println!("Option inválida"),
+        _ => println!("Invalid Option"),
     }
 }
