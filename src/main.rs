@@ -1,8 +1,15 @@
 use dialoguer::{Select, theme::ColorfulTheme};
 use std::io;
+use std::num::ParseFloatError;
 
 mod convert_px_to_em;
 use convert_px_to_em::convert_px_to_em;
+
+mod convert_px_to_rem;
+use convert_px_to_rem::convert_px_to_rem;
+
+mod convert_px_to_percentage;
+use convert_px_to_percentage::convert_px_to_percentage;
 
 fn main() {
     println!("{:-^40}", "Length Converter");
@@ -17,36 +24,51 @@ fn main() {
         .default(0) // Default option
         .interact()
         .unwrap();
+    
+    pub fn get_typed_value() -> Result<f32, ParseFloatError> {
+        let mut input = String::new();
+        println!("Type the number in px to be converted to em");
+    
+        io::stdin()
+            .read_line(&mut input)
+            .expect("Error reading console");
+    
+        let value: Result<f32, ParseFloatError> = input.trim().parse();
 
-    // Execute a lógica com base na Option selecionada
+        return value;
+    }
+
     match selection {
         0 => {
-
-            let mut input = String::new();
-            println!("Type the number in px to be converted to em");
-    
-            io::stdin()
-                .read_line(&mut input)
-                .expect("Error reading console");
-
-            // let value: Result<i32, _> = input.trim().parse();
-            let value: Result<f32, _> = input.trim().parse();
-
-            match value {
+            match get_typed_value() {
                 Ok(numero) => {
-                    // Chamando a função com o valor convertido
-                    println!("O resultado é {} em", convert_px_to_em(numero));
-        
-                    // Agora você pode usar 'numero' como um inteiro
-                    // ... faça o que precisar com o inteiro aqui ...
+                    println!("O resultado é {}em", convert_px_to_em(numero));        
                 }
                 Err(e) => {
                     println!("Error type a valid number: {}", e);
                 }
             }
         },
-        1 => println!("Você escolheu a Option 2"),
-        2 => println!("Você escolheu a Option 3"),
+        1 => {
+            match get_typed_value() {
+                Ok(numero) => {
+                    println!("O resultado é {}rem", convert_px_to_rem(numero));        
+                }
+                Err(e) => {
+                    println!("Error type a valid number: {}", e);
+                }
+            }
+        },
+        2 => {
+            match get_typed_value() {
+                Ok(numero) => {
+                    println!("O resultado é {}%", convert_px_to_percentage(numero));        
+                }
+                Err(e) => {
+                    println!("Error type a valid number: {}", e);
+                }
+            }
+        },
         _ => println!("Invalid Option"),
     }
 }
