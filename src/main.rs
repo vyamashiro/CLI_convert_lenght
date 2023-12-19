@@ -34,7 +34,6 @@ fn main() {
             .expect("Error reading console");
     
         input.trim().parse()
-
     }
 
     fn convert_and_print_result(convert_fn: fn(f32) -> f32, unit: &str) {
