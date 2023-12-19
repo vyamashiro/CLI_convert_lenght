@@ -33,42 +33,26 @@ fn main() {
             .read_line(&mut input)
             .expect("Error reading console");
     
-        let value: Result<f32, ParseFloatError> = input.trim().parse();
+        input.trim().parse()
 
-        return value;
     }
 
+    fn convert_and_print_result(convert_fn: fn(f32) -> f32, unit: &str) {
+        match get_typed_value() {
+            Ok(numero) => {
+                println!("O resultado é {}{}", convert_fn(numero), unit);
+            }
+            Err(_e) => {
+                println!("Error, try again. Type a valid a number please");
+            }
+        }
+    }
+    
     match selection {
-        0 => {
-            match get_typed_value() {
-                Ok(numero) => {
-                    println!("O resultado é {}em", convert_px_to_em(numero));        
-                }
-                Err(e) => {
-                    println!("Error type a valid number: {}", e);
-                }
-            }
-        },
-        1 => {
-            match get_typed_value() {
-                Ok(numero) => {
-                    println!("O resultado é {}rem", convert_px_to_rem(numero));        
-                }
-                Err(e) => {
-                    println!("Error type a valid number: {}", e);
-                }
-            }
-        },
-        2 => {
-            match get_typed_value() {
-                Ok(numero) => {
-                    println!("O resultado é {}%", convert_px_to_percentage(numero));        
-                }
-                Err(e) => {
-                    println!("Error type a valid number: {}", e);
-                }
-            }
-        },
+        0 => convert_and_print_result(convert_px_to_em, "em"),
+        1 => convert_and_print_result(convert_px_to_rem, "rem"),
+        2 => convert_and_print_result(convert_px_to_percentage, "%"),
         _ => println!("Invalid Option"),
     }
+
 }
